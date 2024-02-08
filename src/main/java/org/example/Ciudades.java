@@ -1,13 +1,13 @@
 package org.example;
 
-public class Productos {
+public class Ciudades {
     int clave;
     String nombre;
 
-    public Productos() {
+    public Ciudades() {
     }
 
-    public Productos(int clave, String nombre) {
+    public Ciudades(int clave, String nombre) {
         this.clave = clave;
         this.nombre = nombre;
     }
@@ -30,9 +30,10 @@ public class Productos {
 
     @Override
     public String toString() {
-        return "Productos{" +
+        return "Ciudades{" +
                 "clave=" + clave +
                 ", nombre='" + nombre + '\'' +
                 '}';
     }
 }
+
