@@ -1,19 +1,78 @@
 package org.example;
-
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        System.out.println("Bienvenido");
+        Scanner inputInt = new Scanner(System.in);
+        Scanner inputString = new Scanner(System.in);
+        ArrayList<Clientes> clientes = new ArrayList<>();
+        ArrayList<Proveedores> proveedores = new ArrayList<>();
+        ArrayList<Ciudades> ciudades = new ArrayList<>();
+        ArrayList<Productos> productos = new ArrayList<>();
+        int op=0,clave;
+        String nombre;
+        do{
+            System.out.println("Que operacion desea realizar");
+            System.out.println("1.- agregar cliente");
+            System.out.println("2.- agregar ciudad");
+            System.out.println("3.- agregar proveedor");
+            System.out.println("4.- agregar producto");
+            System.out.println("5.- agregar no recuerdo");
+            System.out.println("6.- mostrar reporte de datos");
+            System.out.println("0.- salir");
+            op = inputInt.nextInt();
+            if(op==1){
+                System.out.println("ingrese la clave correspondiente");
+                clave = inputInt.nextInt();
+                System.out.println("ingrese el nombre");
+                nombre = inputString.nextLine();
+                clientes.add(new Clientes(clave,nombre));
+            }
+            else if(op==2){
+                System.out.println("ingrese la clave correspondiente");
+                clave = inputInt.nextInt();
+                System.out.println("ingrese el nombre");
+                nombre = inputString.nextLine();
+                ciudades.add(new Ciudades(clave,nombre));
+            }
+            else if(op==3){
+                System.out.println("ingrese la clave correspondiente");
+                clave = inputInt.nextInt();
+                System.out.println("ingrese el nombre");
+                nombre = inputString.nextLine();
+                proveedores.add(new Proveedores(clave,nombre));
+            }
+            else if(op==4){
+                System.out.println("ingrese la clave correspondiente");
+                clave = inputInt.nextInt();
+                System.out.println("ingrese el nombre");
+                nombre = inputString.nextLine();
+                productos.add(new Productos(clave,nombre));
+            }
+            else if(op==5){
 
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
-        }
+            }
+            else if(op==6){
+                System.out.println("Clientes registrados "+clientes.size());
+                for(Clientes c:clientes){
+                    System.out.println(c.toString());
+                }
+                System.out.println("Ciudades registradas "+ciudades.size());
+                for(Ciudades c:ciudades){
+                    System.out.println(c.toString());
+                }
+                System.out.println("Proveedores registrados "+proveedores.size());
+                for(Proveedores p:proveedores){
+                    System.out.println(p.toString());
+                }
+                System.out.println("Productos registrados "+productos.size());
+                for(Productos p:productos){
+                    System.out.println(p.toString());
+                }
+            }
+        }while(op!=0);
+        System.out.println("Adios");
     }
 }
+
