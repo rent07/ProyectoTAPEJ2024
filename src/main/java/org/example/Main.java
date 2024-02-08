@@ -10,6 +10,7 @@ public class Main {
         ArrayList<Proveedores> proveedores = new ArrayList<>();
         ArrayList<Ciudades> ciudades = new ArrayList<>();
         ArrayList<Productos> productos = new ArrayList<>();
+        ArrayList<Estados> estados = new ArrayList<>();
         int op=0,clave;
         String nombre;
         do{
@@ -18,7 +19,7 @@ public class Main {
             System.out.println("2.- agregar ciudad");
             System.out.println("3.- agregar proveedor");
             System.out.println("4.- agregar producto");
-            System.out.println("5.- agregar no recuerdo");
+            System.out.println("5.- agregar estado");
             System.out.println("6.- mostrar reporte de datos");
             System.out.println("0.- salir");
             op = inputInt.nextInt();
@@ -51,7 +52,11 @@ public class Main {
                 productos.add(new Productos(clave,nombre));
             }
             else if(op==5){
-                ///otras condiciones
+                System.out.println("ingrese la clave correspondiente");
+                clave = inputInt.nextInt();
+                System.out.println("ingrese el nombre");
+                nombre = inputString.nextLine();
+                estados.add(new Estados(clave, nombre));
             }
             else if(op==6){
                 System.out.println("Clientes registrados "+clientes.size());
