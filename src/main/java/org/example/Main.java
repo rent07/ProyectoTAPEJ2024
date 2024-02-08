@@ -59,21 +59,25 @@ public class Main {
                 estados.add(new Estados(clave, nombre));
             }
             else if(op==6){
-                System.out.println("Clientes registrados "+clientes.size());
+                System.out.println("Clientes registrados: "+clientes.size());
                 for(Clientes c:clientes){
                     System.out.println(c.toString());
                 }
-                System.out.println("Ciudades registradas "+ciudades.size());
+                System.out.println("Ciudades registradas: "+ciudades.size());
                 for(Ciudades c:ciudades){
                     System.out.println(c.toString());
                 }
-                System.out.println("Proveedores registrados "+proveedores.size());
+                System.out.println("Proveedores registrados: "+proveedores.size());
                 for(Proveedores p:proveedores){
                     System.out.println(p.toString());
                 }
-                System.out.println("Productos registrados "+productos.size());
+                System.out.println("Productos registrados: "+productos.size());
                 for(Productos p:productos){
                     System.out.println(p.toString());
+                }
+                System.out.println("Estados registrados: "+estados.size());
+                for(Estados e:estados){
+                    System.out.println(e.toString());
                 }
             }
         }while(op!=0);
