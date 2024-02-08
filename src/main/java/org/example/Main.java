@@ -11,7 +11,7 @@ public class Main {
         ArrayList<Ciudades> ciudades = new ArrayList<>();
         ArrayList<Productos> productos = new ArrayList<>();
         ArrayList<Estados> estados = new ArrayList<>();
-        int op=0,clave;
+        int op,clave;
         String nombre;
         do{
             System.out.println("Que operacion desea realizar");
