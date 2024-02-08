@@ -51,7 +51,7 @@ public class Main {
                 productos.add(new Productos(clave,nombre));
             }
             else if(op==5){
-
+                ///otras condiciones
             }
             else if(op==6){
                 System.out.println("Clientes registrados "+clientes.size());
