@@ -26,13 +26,13 @@ public class InterfazProveedores {
 
 
         //Creación de Layouts
-        GridLayout gridLayoutEncabezado = new GridLayout(2,1);
+        BoxLayout boxLayout = new BoxLayout(panelEncabezado, BoxLayout.Y_AXIS);
         GridLayout gridLayoutCuerpo = new GridLayout(6,2);
         BorderLayout borderLayout = new BorderLayout();
 
         //Asignamos a cada panel su tipo de Layout
         panelGeneral.setLayout(borderLayout);
-        panelEncabezado.setLayout(gridLayoutEncabezado);
+        panelEncabezado.setLayout(boxLayout);
         panelCuerpo.setLayout(gridLayoutCuerpo);
 
         //Creacion de etiquetas
