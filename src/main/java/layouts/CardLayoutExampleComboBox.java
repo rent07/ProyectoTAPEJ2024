@@ -18,10 +18,10 @@ public class CardLayoutExampleComboBox implements ItemListener{//usamos la inter
         jCmbCategoria.addItem("Hogar");
         jCmbCategoria.addItem("Zapateria");
         jCmbCategoria.setEditable(false);
-        jCmbCategoria.addItemListener(this);
-        comboBoxPanel.add(jCmbCategoria);
+        jCmbCategoria.addItemListener(this);// agregamos listener para que detecte
+        comboBoxPanel.add(jCmbCategoria);           //cuando seleccionamos una categoría
 
-        //Create the "cards".
+        //Crear las "cards".
         JPanel cardRopa = new JPanel();
         cardRopa.add(new JButton("Camisas"));
         cardRopa.add(new JButton("Pantalones"));
@@ -40,24 +40,24 @@ public class CardLayoutExampleComboBox implements ItemListener{//usamos la inter
         cardZapateria.add(new JButton("Zapatos"));
         cardZapateria.add(new JButton("Chanclas"));
 
-        //Create the panel that contains the "cards".
+        //Creamos el panel que contiene las "cards".
         cards = new JPanel(new CardLayout());
         cards.add(cardRopa, ROPAPANEL);
         cards.add(cardHogar, HOGARPANEL);
         cards.add(cardZapateria, ZAPTERIAPANEL);
 
-        panel.add(comboBoxPanel, BorderLayout.PAGE_START);
-        panel.add(cards, BorderLayout.CENTER);
+        panel.add(comboBoxPanel, BorderLayout.PAGE_START);//agregamos al panel general la comboBox
+        panel.add(cards, BorderLayout.CENTER);//agregamos al panel general las "cards"
     }
 
     public void itemStateChanged(ItemEvent evt) {//cambia la pantalla entre las diferentes categorias
         CardLayout cl = (CardLayout)(cards.getLayout());
-        cl.show(cards, (String)evt.getItem());
+        cl.show(cards, (String)evt.getItem());//mostrar la card solicitada
     }
 
 
     private static void createAndShowGUI() {
-        //Crear la ve ntana
+        //Crear la ventana
         JFrame ventana = new JFrame("Tienda departamental");
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setSize(5000,4000);
@@ -75,6 +75,7 @@ public class CardLayoutExampleComboBox implements ItemListener{//usamos la inter
     public static void main(String[] args) {
         // se usan excepciones
         try {
+            //para evitar errores
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (UnsupportedLookAndFeelException ex) {
@@ -86,8 +87,6 @@ public class CardLayoutExampleComboBox implements ItemListener{//usamos la inter
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-        // Turn off metal's use of bold fonts
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
