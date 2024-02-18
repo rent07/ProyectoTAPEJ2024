@@ -28,7 +28,6 @@ public class InterfazProveedores {
         //Creación de Layouts
         GridLayout gridLayoutEncabezado = new GridLayout(2,1);
         GridLayout gridLayoutCuerpo = new GridLayout(6,2);
-        GridLayout gridLayoutPie = new GridLayout(2,1);
         BorderLayout borderLayout = new BorderLayout();
 
         //Asignamos a cada panel su tipo de Layout
