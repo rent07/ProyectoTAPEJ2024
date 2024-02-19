@@ -137,6 +137,8 @@ public class InterfazCiudades {
         panelDtDemograficos.add(new JLabel(" "),gbc);
         gbc.gridy++;
         panelDtDemograficos.add(new JLabel(" "),gbc);
+        gbc.gridy++;
+        panelDtDemograficos.add(new JLabel(""),gbc);
 
         //panel datos socio-culturales
         gbc.gridx = 0;
