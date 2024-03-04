@@ -1,80 +1,164 @@
 package EscritorioGrafico;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Paint extends JFrame {
-    private int cuentaPuntos = 0;
+    private List<Point> puntos = new ArrayList<>();
+    private List<Color> colores = new ArrayList<>();
+    private List<Integer> tamanosPinceles = new ArrayList<>();
+    private Color colorPincel = Color.BLACK; // Color por defecto para el pincel
+    private int tamanoPincel = 5; // Tamaño por defecto para el pincel
+    private boolean modoGoma = false;
 
-    // arreglo de 2000 referencias a java.awt.Point
-    private Point puntos[] = new Point[2000];
-    private Color colores[] = new Color[2000];
-    private Integer pinceles[] = new Integer[2000];
-
-    // configurar GUI y registrar manejador de eventos de ratón
     public Paint() {
-        super("Un programa simple de dibujo");
+        super("Paint");
 
-        // crear una etiqueta y colocarla en la parte SOUTH del esquema BorderLayout
-        getContentPane().add(new JLabel("Arrastre el ratón para dibujar"),
-                BorderLayout.SOUTH);
-        getContentPane().add(new JButton("Borrar"), BorderLayout.NORTH);
-        addMouseMotionListener(new MouseMotionAdapter() { // clase interna anónima
-                                   // almacenar coordenadas de arrastre y llamar a repaint
-                                   public void mouseDragged(MouseEvent evento) {
-                                       if (cuentaPuntos < puntos.length) {
-                                           System.out.println("Entro en puntos.length " + cuentaPuntos);
-                                           if (cuentaPuntos < 100) {
+        // Panel para los controles
+        JPanel panelControles = new JPanel(new GridLayout(1, 3));
 
-                                               colores[cuentaPuntos] = Color.red;
-                                               pinceles[cuentaPuntos] = 5;
-                                               System.out.println(evento.getX());
-                                           } else {
-                                               if (cuentaPuntos < 500) {
-                                                   colores[cuentaPuntos] = Color.BLUE;
-                                                   pinceles[cuentaPuntos] = 8;
-                                               } else {
-                                                   colores[cuentaPuntos] = Color.GREEN;
-                                                   pinceles[cuentaPuntos] = 12;
+        // Panel para el título
+        JPanel panelTitulo = new JPanel();
+        JLabel labelTitulo = new JLabel("PROGRAMA SIMPLE DE DIBUJO");
+        labelTitulo.setFont(new Font("Arial", Font.BOLD, 24)); // Cambiar el tamaño y el estilo de la fuente
+        panelTitulo.add(labelTitulo);
 
-                                                   if (cuentaPuntos < 1000) {
-                                                       colores[cuentaPuntos] = Color.BLACK;
-                                                       pinceles[cuentaPuntos] = 15;
-                                                   }
-                                               }
+        // Panel para el tamaño
+        JPanel panelTamaño = new JPanel();
+        panelTamaño.setBorder(BorderFactory.createTitledBorder("Tamaño"));
+        JButton botonMenos = new JButton("-");
+        JButton botonMas = new JButton("+");
+        panelTamaño.add(botonMenos);
+        panelTamaño.add(botonMas);
 
-                                           }
-                                           puntos[cuentaPuntos] = evento.getPoint();
-                                           ++cuentaPuntos;
-                                           repaint();
-                                       }
-                                   }
+        // Panel para las herramientas
+        JPanel panelHerramientas = new JPanel();
+        panelHerramientas.setBorder(BorderFactory.createTitledBorder("Herramientas"));
+        JButton botonPincel = new JButton("Pincel");
+        JButton botonGoma = new JButton("Goma");
+        panelHerramientas.add(botonPincel);
+        panelHerramientas.add(botonGoma);
 
-                               } // fin de la clase interna anónima
+        // Panel para el color
+        JPanel panelColor = new JPanel();
+        panelColor.setBorder(BorderFactory.createTitledBorder("Color"));
+        JButton botonColor = new JButton("Seleccionar Color");
+        panelColor.add(botonColor);
 
-        ); // fin de la llamada a addMouseMotionListener
+        // Panel para restaurar
+        JPanel panelRestaurar = new JPanel();
+        panelRestaurar.setBorder(BorderFactory.createTitledBorder("Restaurar"));
+        JButton botonBorrar = new JButton("Borrar Todo");
+        panelRestaurar.add(botonBorrar);
 
-        setBounds(500, 400, 800, 650);
+        panelControles.add(panelTamaño);
+        panelControles.add(panelHerramientas);
+        panelControles.add(panelColor);
+        panelControles.add(panelRestaurar);
+
+        // Panel para el área de dibujo
+        JPanel panelDibujo = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Establecer el fondo blanco
+                g.setColor(Color.WHITE);
+                g.fillRect(0, 0, getWidth(), getHeight());
+                for (int i = 0; i < puntos.size(); i++) {
+                    g.setColor(colores.get(i));
+                    g.fillOval(puntos.get(i).x, puntos.get(i).y, tamanosPinceles.get(i), tamanosPinceles.get(i));
+                }
+            }
+        };
+        panelDibujo.setPreferredSize(new Dimension(800, 500));
+        panelDibujo.setBackground(Color.WHITE); // Establecer el fondo del panel de dibujo como blanco
+
+        // Listener Botones
+        botonMenos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tamanoPincel > 5) {
+                    tamanoPincel -= 5;
+                }
+            }
+        });
+
+        botonMas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tamanoPincel < 50) {
+                    tamanoPincel += 5;
+                }
+            }
+        });
+
+        botonColor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                colorPincel = JColorChooser.showDialog(null, "Seleccionar Color", colorPincel);
+            }
+        });
+
+        botonBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                puntos.clear();
+                colores.clear();
+                tamanosPinceles.clear();
+                panelDibujo.repaint();
+            }
+        });
+
+        botonPincel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modoGoma = false;
+                colorPincel = Color.BLACK; // Cambiar a pincel negro por defecto
+            }
+        });
+
+        botonGoma.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modoGoma = true;
+            }
+        });
+
+        // Agregar los paneles a la ventana
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(panelTitulo, BorderLayout.NORTH);
+        getContentPane().add(panelControles, BorderLayout.CENTER);
+        getContentPane().add(panelDibujo, BorderLayout.SOUTH);
+
+        //Valores iniciales de la Ventana
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack(); //Hace que al reajustar el tamaño del frame sus elementos se reajusten para que no se desordenen
+        setLocationRelativeTo(null);//Hace que el frame se localice justo en el centro de la pantalla
+        setResizable(false);
         setVisible(true);
 
-    } // fin del constructor de Paint
-
-    // dibujar óvalo en un cuadro delimitador de 4 por 4 en ubicación especificada
-    // en ventana
-    public void paint(Graphics g) {
-        super.paint(g); // borra el área de dibujo
-        // g.setColor(Color.RED);
-
-        for (int i = 0; i < puntos.length && puntos[i] != null; i++) {
-            g.setColor(colores[i]);
-            g.fillOval(puntos[i].x, puntos[i].y, pinceles[i], pinceles[i]);
-        }
-
+        // Agrega un MouseMotionListener al panel de dibujo para dibujar
+        panelDibujo.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent evento) {
+                if (modoGoma) { // Si estamos en modo goma, pintamos de blanco
+                    puntos.add(evento.getPoint());
+                    colores.add(Color.WHITE);
+                    tamanosPinceles.add(tamanoPincel);
+                    panelDibujo.repaint();
+                } else {
+                    puntos.add(evento.getPoint());
+                    colores.add(colorPincel);
+                    tamanosPinceles.add(tamanoPincel);
+                    panelDibujo.repaint();
+                }
+            }
+        });
     }
-
 }
