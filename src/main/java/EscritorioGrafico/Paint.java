@@ -56,6 +56,8 @@ public class Paint extends JFrame {
         // Panel para restaurar
         JPanel panelRestaurar = new JPanel();
         panelRestaurar.setBorder(BorderFactory.createTitledBorder("Restaurar"));
+        JButton bottonRegresar = new JButton("Atrás");
+        panelRestaurar.add(bottonRegresar);
         JButton botonBorrar = new JButton("Borrar Todo");
         panelRestaurar.add(botonBorrar);
 
@@ -71,9 +73,6 @@ public class Paint extends JFrame {
         panelFiguras.add(botonOvalo);
         panelFiguras.add(botonRectangulo);
 
-        JButton bottonRegresar = new JButton("atrás");
-
-        panelControles.add(bottonRegresar);
         panelControles.add(panelTamaño);
         panelControles.add(panelHerramientas);
         panelControles.add(panelColor);
