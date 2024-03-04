@@ -55,13 +55,15 @@ public class Graficos extends JFrame {
         // for(int i = 0; i < this.longitud; i++) {
         //   g.drawLine(25+i, 125, 25+i, 125);
         // }
-        System.out.println("Gráfica");
+        System.out.println("Gráfica cuadrática");
         for (int x = -longitud/2; x < longitud/2; x++) {
             int y0 = (int) (Math.pow(x, 2));
             int y1 = (int) (Math.pow(x+1, 2));
             g.drawLine(200 + x, (200 - y0), 200 + x + 1, 200 - y1);
             g.setColor(Color.RED);
         }
+
+        g.drawString("Función Cuadrática", 50, 100);
         System.out.println("Pentagono");
         //Pentagono
         g.setColor(new Color(127, 255, 212)); // Color aquamarina
@@ -71,6 +73,8 @@ public class Graficos extends JFrame {
         Polygon pentagon = new Polygon(xPoints, yPoints, nPoints);
         g.drawPolygon(pentagon);
 
+
+
         //Función lineal
         System.out.println("Funcion  lineal");
         g.setColor(Color.GREEN);
@@ -78,6 +82,8 @@ public class Graficos extends JFrame {
             int y = 2 * x + 50;  // Ecuación de una función lineal
             g.drawLine(200 + x, (200 - y), 200 + x + 1, 200 - (2 * (x + 1) + 50));
         }
+        g.drawString("Funcion Lineal", 285, 50);
+
         // Dibuja la onda senoidal en azul
         System.out.println("Onda Senoidal");
         g.setColor(Color.BLUE);
@@ -86,6 +92,18 @@ public class Graficos extends JFrame {
             int y1 = (int) (50 * Math.sin(0.1 * (x + 1)));
             g.drawLine(200 + x, (200 - y0), 200 + x + 1, 200 - y1);
         }
+        g.drawString("Onda Senoidal", 30, 270);
+
+        // Dibuja onda coseno
+        System.out.println("Onda coseno");
+        g.setColor(Color.ORANGE);
+        for (int x = -longitud / 2; x < longitud / 2; x++) {
+            int y0 = (int) (50 * Math.cos(0.1 * x));
+            int y1 = (int) (50 * Math.cos(0.1 * (x + 1)));
+            g.drawLine(200 + x, (200 - y0), 200 + x + 1, 200 - y1);
+        }
+        g.drawString("Onda coseno", 230, 130);
+
         // Octagono
         System.out.println("Octagono");
         g.setColor(Color.BLACK);
@@ -93,12 +111,17 @@ public class Graficos extends JFrame {
         int[] yOctagonPoints = {310, 310, 330, 360, 380, 380, 360, 330, 310};
         int nOctagonPoints = 9;
         g.fillPolygon(xOctagonPoints, yOctagonPoints, nOctagonPoints);
+        g.drawString("Octagono", 280, 300);
 
         System.out.println("Eje X");
         g.drawLine(-400, 200, 400, 200);
+        g.drawString("-x", 3, 195);
+        g.drawString("x", 390, 195);
 
         System.out.println("Eje Y");
         g.drawLine(200, -200, 200, 400);
+        g.drawString("y", 205, 40);
+        g.drawString("-y", 205, 320);
 
 
 
