@@ -94,6 +94,12 @@ public class Graficos extends JFrame {
         int nOctagonPoints = 9;
         g.fillPolygon(xOctagonPoints, yOctagonPoints, nOctagonPoints);
 
+        System.out.println("Eje X");
+        g.drawLine(-400, 200, 400, 200);
+
+        System.out.println("Eje Y");
+        g.drawLine(200, -200, 200, 400);
+
 
 
 
