@@ -9,11 +9,12 @@ public class Graficos extends JFrame {
     /** Creates new form MiGrafico */
     public Graficos(int longitud) {
         super("Graficadora de funciones");
-        setSize(10, 830);
+        setSize(400, 500);
         setVisible(true);
         this.longitud = longitud;
-
+        setLocationRelativeTo(null);
         initComponents();
+
     }
 
     @Override
@@ -50,7 +51,7 @@ public class Graficos extends JFrame {
         // g.drawLine(200, 125, 25, 200);
         // g.setColor(Color.CYAN);
         // g.drawLine(200, 125, 300, 200);
-        g.setColor(Color.BLUE);
+        //g.setColor(Color.BLUE);
         // for(int i = 0; i < this.longitud; i++) {
         //   g.drawLine(25+i, 125, 25+i, 125);
         // }
@@ -59,9 +60,46 @@ public class Graficos extends JFrame {
             int y0 = (int) (Math.pow(x, 2));
             int y1 = (int) (Math.pow(x+1, 2));
             g.drawLine(200 + x, (200 - y0), 200 + x + 1, 200 - y1);
+            g.setColor(Color.RED);
         }
+        System.out.println("Pentagono");
+        //Pentagono
+        g.setColor(new Color(127, 255, 212)); // Color aquamarina
+        int[] xPoints = {200, 230, 260, 260, 230};
+        int[] yPoints = {300, 330, 300, 270, 270};
+        int nPoints = 5;
+        Polygon pentagon = new Polygon(xPoints, yPoints, nPoints);
+        g.drawPolygon(pentagon);
 
-        // // Rectangulos
+        //Función lineal
+        System.out.println("Funcion  lineal");
+        g.setColor(Color.GREEN);
+        for (int x = -longitud / 2; x < longitud / 2; x++) {
+            int y = 2 * x + 50;  // Ecuación de una función lineal
+            g.drawLine(200 + x, (200 - y), 200 + x + 1, 200 - (2 * (x + 1) + 50));
+        }
+        // Dibuja la onda senoidal en azul
+        System.out.println("Onda Senoidal");
+        g.setColor(Color.BLUE);
+        for (int x = -longitud / 2; x < longitud / 2; x++) {
+            int y0 = (int) (50 * Math.sin(0.1 * x));
+            int y1 = (int) (50 * Math.sin(0.1 * (x + 1)));
+            g.drawLine(200 + x, (200 - y0), 200 + x + 1, 200 - y1);
+        }
+        // Octagono
+        System.out.println("Octagono");
+        g.setColor(Color.BLACK);
+        int[] xOctagonPoints = {300, 330, 350, 350, 330, 300, 280, 280, 300};
+        int[] yOctagonPoints = {310, 310, 330, 360, 380, 380, 360, 330, 310};
+        int nOctagonPoints = 9;
+        g.fillPolygon(xOctagonPoints, yOctagonPoints, nOctagonPoints);
+
+
+
+
+
+
+    // // Rectangulos
         // g.setColor(Color.RED);
         // g.drawRect(25, 225, 300, 20);
 
