@@ -78,7 +78,7 @@ public class Paint extends JFrame {
         panelControles.add(panelHerramientas);
         panelControles.add(panelColor);
         panelControles.add(panelRestaurar);
-        panelControles.add(panelFiguras);
+       // panelControles.add(panelFiguras);
 
         // Panel para el área de dibujo
         JPanel panelDibujo = new JPanel() {
