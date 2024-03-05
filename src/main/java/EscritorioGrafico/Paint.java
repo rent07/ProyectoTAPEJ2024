@@ -16,12 +16,14 @@ public class Paint extends JFrame {
     private Color colorPincel = Color.BLACK; // Color por defecto para el pincel
     private int tamanoPincel = 5; // Tamaño por defecto para el pincel
     private boolean modoGoma = false;
+    private int figura = 0;
+    Graphics g;
 
     public Paint() {
         super("Paint");
 
         // Panel para los controles
-        JPanel panelControles = new JPanel(new GridLayout(1, 3));
+        JPanel panelControles = new JPanel(new GridBagLayout());
 
         // Panel para el título
         JPanel panelTitulo = new JPanel();
@@ -54,13 +56,28 @@ public class Paint extends JFrame {
         // Panel para restaurar
         JPanel panelRestaurar = new JPanel();
         panelRestaurar.setBorder(BorderFactory.createTitledBorder("Restaurar"));
+        JButton bottonRegresar = new JButton("Atrás");
+        panelRestaurar.add(bottonRegresar);
         JButton botonBorrar = new JButton("Borrar Todo");
         panelRestaurar.add(botonBorrar);
+
+        //panel para figuras
+        JPanel panelFiguras = new JPanel(new GridLayout(2,2));
+        panelFiguras.setBorder(BorderFactory.createTitledBorder("Figuras"));
+        JButton botonCuadrado = new JButton("Cuadrado");
+        JButton botonRectangulo = new JButton("Rectangulo");
+        JButton botonCirculo = new JButton("Circulo");
+        JButton botonOvalo = new JButton("Ovalo");
+        panelFiguras.add(botonCirculo);
+        panelFiguras.add(botonCuadrado);
+        panelFiguras.add(botonOvalo);
+        panelFiguras.add(botonRectangulo);
 
         panelControles.add(panelTamaño);
         panelControles.add(panelHerramientas);
         panelControles.add(panelColor);
         panelControles.add(panelRestaurar);
+       // panelControles.add(panelFiguras);
 
         // Panel para el área de dibujo
         JPanel panelDibujo = new JPanel() {
@@ -80,6 +97,17 @@ public class Paint extends JFrame {
         panelDibujo.setBackground(Color.WHITE); // Establecer el fondo del panel de dibujo como blanco
 
         // Listener Botones
+        bottonRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(puntos.size()>0 && colores.size()>0 && tamanosPinceles.size()>0){
+                    puntos.remove(puntos.size()-1);
+                    colores.remove(colores.size()-1);
+                    tamanosPinceles.remove(tamanosPinceles.size()-1);
+                    panelDibujo.repaint();
+                }
+            }
+        });
         botonMenos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -130,6 +158,24 @@ public class Paint extends JFrame {
             }
         });
 
+        botonCirculo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                figura= 1;
+            }
+        });
+        botonCuadrado.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                figura= 2;
+            }
+        });
+        botonOvalo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                figura= 3;
+            }
+        });
+        botonRectangulo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {figura= 4;}
+        });
         // Agregar los paneles a la ventana
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(panelTitulo, BorderLayout.NORTH);
@@ -160,5 +206,6 @@ public class Paint extends JFrame {
                 }
             }
         });
+        //panelDibujo.addMouseListener((MouseMotionAdapter) MouseClicked(MouseEvent e));
     }
 }
